@@ -60,6 +60,6 @@ class DataManager:
         right_pad = (config.target_image_width - width) // 2 + np.mod(config.target_image_width - width, 2)
         img = np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad)), 'constant', constant_values=255)
         # 3. scale graylevel 255. to 0. and graylevel 0. to 255.
-        image = 255 - img
+        image = (255 - img)
         image = image.astype(np.float32)
         return image
