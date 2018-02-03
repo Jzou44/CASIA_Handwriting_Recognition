@@ -1,0 +1,80 @@
+2018-02-03 04:19:33,832 - tensorflow - INFO - Restoring parameters from weigths/model_1/weigths.ckpt
+2018-02-03 04:19:35,634 - tensorflow - INFO - batch_round: 0
+2018-02-03 04:19:35,634 - tensorflow - INFO - cost=2.630108833
+2018-02-03 04:19:36,265 - tensorflow - INFO - save model 1 weight to weigths/model_1/weigths.ckpt
+2018-02-03 04:19:36,583 - tensorflow - INFO - batch_round: 1
+2018-02-03 04:19:36,583 - tensorflow - INFO - cost=2.594472885
+2018-02-03 04:19:36,912 - tensorflow - INFO - batch_round: 2
+2018-02-03 04:19:36,912 - tensorflow - INFO - cost=2.538134813
+2018-02-03 04:19:37,227 - tensorflow - INFO - batch_round: 3
+2018-02-03 04:19:37,228 - tensorflow - INFO - cost=2.680989027
+2018-02-03 04:19:37,587 - tensorflow - INFO - batch_round: 4
+2018-02-03 04:19:37,588 - tensorflow - INFO - cost=2.580155373
+2018-02-03 04:19:37,921 - tensorflow - INFO - batch_round: 5
+2018-02-03 04:19:37,922 - tensorflow - INFO - cost=2.602157593
+2018-02-03 04:19:38,244 - tensorflow - INFO - batch_round: 6
+2018-02-03 04:19:38,244 - tensorflow - INFO - cost=2.606651068
+2018-02-03 04:19:38,562 - tensorflow - INFO - batch_round: 7
+2018-02-03 04:19:38,562 - tensorflow - INFO - cost=2.570348263
+2018-02-03 04:19:38,928 - tensorflow - INFO - batch_round: 8
+2018-02-03 04:19:38,928 - tensorflow - INFO - cost=2.541203499
+2018-02-03 04:19:39,328 - tensorflow - INFO - batch_round: 9
+2018-02-03 04:19:39,328 - tensorflow - INFO - cost=2.573840380
+2018-02-03 04:19:39,544 - tensorflow - INFO - batch_round: 10
+2018-02-03 04:19:39,544 - tensorflow - INFO - cost=2.561394930
+2018-02-03 04:19:39,893 - tensorflow - INFO - batch_round: 11
+2018-02-03 04:19:39,893 - tensorflow - INFO - cost=2.518371820
+2018-02-03 04:19:40,310 - tensorflow - INFO - batch_round: 12
+2018-02-03 04:19:40,310 - tensorflow - INFO - cost=2.648794889
+2018-02-03 04:19:40,513 - tensorflow - INFO - batch_round: 13
+2018-02-03 04:19:40,513 - tensorflow - INFO - cost=2.410536528
+2018-02-03 04:19:40,968 - tensorflow - INFO - batch_round: 14
+2018-02-03 04:19:40,968 - tensorflow - INFO - cost=2.755914688
+2018-02-03 04:19:41,178 - tensorflow - INFO - batch_round: 15
+2018-02-03 04:19:41,178 - tensorflow - INFO - cost=2.495264053
+2018-02-03 04:19:41,606 - tensorflow - INFO - batch_round: 16
+2018-02-03 04:19:41,606 - tensorflow - INFO - cost=2.640283585
+2018-02-03 04:19:41,816 - tensorflow - INFO - batch_round: 17
+2018-02-03 04:19:41,816 - tensorflow - INFO - cost=2.570320368
+2018-02-03 04:19:42,197 - tensorflow - INFO - batch_round: 18
+2018-02-03 04:19:42,197 - tensorflow - INFO - cost=2.555387020
+2018-02-03 04:19:42,475 - tensorflow - INFO - batch_round: 19
+2018-02-03 04:19:42,476 - tensorflow - INFO - cost=2.584529638
+2018-02-03 04:19:42,795 - tensorflow - INFO - batch_round: 20
+2018-02-03 04:19:42,795 - tensorflow - INFO - cost=2.353533983
+2018-02-03 04:19:43,084 - tensorflow - INFO - batch_round: 21
+2018-02-03 04:19:43,084 - tensorflow - INFO - cost=2.534468174
+2018-02-03 04:19:43,440 - tensorflow - INFO - batch_round: 22
+2018-02-03 04:19:43,440 - tensorflow - INFO - cost=2.562249184
+2018-02-03 04:19:43,819 - tensorflow - INFO - batch_round: 23
+2018-02-03 04:19:43,819 - tensorflow - INFO - cost=2.765213013
+2018-02-03 04:19:44,117 - tensorflow - INFO - batch_round: 24
+2018-02-03 04:19:44,117 - tensorflow - INFO - cost=2.304179907
+2018-02-03 04:19:44,533 - tensorflow - INFO - batch_round: 25
+2018-02-03 04:19:44,533 - tensorflow - INFO - cost=2.768852949
+2018-02-03 04:19:44,773 - tensorflow - INFO - batch_round: 26
+2018-02-03 04:19:44,774 - tensorflow - INFO - cost=2.261204720
+2018-02-03 04:19:45,165 - tensorflow - INFO - batch_round: 27
+2018-02-03 04:19:45,165 - tensorflow - INFO - cost=2.767628431
+2018-02-03 04:19:45,399 - tensorflow - INFO - batch_round: 28
+2018-02-03 04:19:45,399 - tensorflow - INFO - cost=2.348721504
+2018-02-03 04:19:45,759 - tensorflow - INFO - batch_round: 29
+2018-02-03 04:19:45,759 - tensorflow - INFO - cost=2.534015894
+2018-02-03 04:19:46,238 - tensorflow - INFO - batch_round: 30
+2018-02-03 04:19:46,238 - tensorflow - INFO - cost=2.725414515
+2018-02-03 04:19:46,574 - tensorflow - INFO - batch_round: 31
+2018-02-03 04:19:46,574 - tensorflow - INFO - cost=2.536308289
+2018-02-03 04:19:46,756 - tensorflow - INFO - batch_round: 32
+2018-02-03 04:19:46,757 - tensorflow - INFO - cost=2.473156691
+2018-02-03 04:19:47,061 - tensorflow - INFO - batch_round: 33
+2018-02-03 04:19:47,061 - tensorflow - INFO - cost=2.494471788
+2018-02-03 04:19:47,538 - tensorflow - INFO - batch_round: 34
+2018-02-03 04:19:47,538 - tensorflow - INFO - cost=2.676378250
+2018-02-03 04:19:47,792 - tensorflow - INFO - batch_round: 35
+2018-02-03 04:19:47,792 - tensorflow - INFO - cost=2.532742977
+2018-02-03 04:19:48,126 - tensorflow - INFO - batch_round: 36
+2018-02-03 04:19:48,126 - tensorflow - INFO - cost=2.554648161
+2018-02-03 04:19:48,477 - tensorflow - INFO - batch_round: 37
+2018-02-03 04:19:48,477 - tensorflow - INFO - cost=2.583467484
+2018-02-03 04:19:48,685 - tensorflow - INFO - batch_round: 38
+2018-02-03 04:19:48,685 - tensorflow - INFO - cost=2.454063892

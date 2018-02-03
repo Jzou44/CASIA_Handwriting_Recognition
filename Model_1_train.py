@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 import config as config
 import CASIA_data_manager as dataManager
 from Logger import log
@@ -120,6 +121,8 @@ with tf.Session() as sess:
         _, cost = sess.run([train_op, loss_op], feed_dict={X: batch_x, Y: batch_y})
         log.info("batch_round: %d" % (batch_round))
         log.info("cost={:.9f}".format(cost))
-        save_path = saver.save(sess, "weigths/model_1/weigths.ckpt")
+        if np.mod(batch_round, 100) == 0:
+            save_path = saver.save(sess, "weigths/model_1/weigths.ckpt")
+            log.info('save model 1 weight to weigths/model_1/weigths.ckpt')
         batch_round = batch_round + 1
     print("Optimization Finished!")
