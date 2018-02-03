@@ -1,6 +1,6 @@
-CASIA_train_file_path = 'C:/Workspace/CASIA/1.0train-gb1.gnt'
-CASIA_test_file_path = 'C:/Workspace/CASIA/1.0test-gb1.gnt'
-CASIA_label_file_path = 'C:/Workspace/CASIA/label.pickle'
+CASIA_train_file_path = 'Dataset/1.0train-gb1.gnt'
+CASIA_test_file_path = 'Dataset/1.0test-gb1.gnt'
+CASIA_label_file_path = 'Dataset/label.pickle'
 subset_label_array_begin_index = 0
 subset_label_array_length = 100
 dataset_header_size = 10
