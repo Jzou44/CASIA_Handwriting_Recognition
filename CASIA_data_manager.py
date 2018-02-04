@@ -9,8 +9,7 @@ class DataManager:
         self.CASIA_test_file = open(config.CASIA_test_file_path, 'rb')
         self.CASIA_label_file = open(config.CASIA_label_file_path, 'rb')
         self.full_label_array = pickle.load(self.CASIA_label_file)  # train label array length = 3740
-        self.subset_label_array = self.full_label_array[
-                                  config.subset_label_array_begin_index: config.subset_label_array_begin_index + config.subset_label_array_length]
+        self.subset_label_array = self.full_label_array[:config.subset_label_array_length]
         self.test_data_reach_end_flag = False
 
     def next_train_batch(self, batch_size):

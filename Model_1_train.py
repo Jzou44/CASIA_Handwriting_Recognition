@@ -128,7 +128,6 @@ with tf.Session() as sess:
                 save_path = saver.save(sess, weigth_path)
                 log.info('save model 1 weight')
             batch_round = batch_round + 1
-        log.info("Optimization Finished!")
     else:
         log.info("start testing model 1...")
         test_sample_batch_number = 0
