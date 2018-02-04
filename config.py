@@ -6,6 +6,7 @@ subset_label_array_length = 100
 dataset_header_size = 10
 target_image_hight = 128
 target_image_width = 128
-batch_size = 256
+train_batch_size = 256
+test_batch_size = 256
 learning_rate = 0.001
-
+train_MODE = False
