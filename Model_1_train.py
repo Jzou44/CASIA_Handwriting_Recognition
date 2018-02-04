@@ -119,21 +119,20 @@ with tf.Session() as sess:
 
     if (config.train_MODE):
         log.info("start training model 1...")
-        batch_round = 0
+        batch_round = 1
         while True:
             batch_x, batch_y = dm.next_train_batch(config.train_batch_size)
             _, cost = sess.run([train_op, loss_op], feed_dict={X: batch_x, Y: batch_y})
-            log.info("batch_round: %d" % (batch_round))
-            log.info("cost in this train batch={:.9f}".format(cost))
+            log.info("batch_round: {0}, cost in this train batch={1}".format(batch_round, cost))
             if np.mod(batch_round, 100) == 0:
                 save_path = saver.save(sess, weigth_path)
                 log.info('save model 1 weight')
             batch_round = batch_round + 1
-        print("Optimization Finished!")
+        log.info("Optimization Finished!")
     else:
         log.info("start testing model 1...")
         test_sample_batch_number = 0
-        test_sample_total_accuracy  =0
+        test_sample_total_accuracy = 0
         while (not dm.test_data_reach_end_flag):
             batch_x, batch_y = dm.next_test_batch(config.test_batch_size)
             pred = tf.nn.softmax(out_layer)
@@ -145,6 +144,6 @@ with tf.Session() as sess:
             log.info("model accuracy in this test batch: %f" % accuracy_eval)
             test_sample_batch_number = test_sample_batch_number + 1
             test_sample_total_accuracy = test_sample_total_accuracy + accuracy_eval
-        test_sample_average_accuracy = test_sample_total_accuracy/test_sample_batch_number
+        test_sample_average_accuracy = test_sample_total_accuracy / test_sample_batch_number
         log.info("finished testing model 1.")
         log.info("average model accuracy of this test dataset: %f" % test_sample_average_accuracy)
