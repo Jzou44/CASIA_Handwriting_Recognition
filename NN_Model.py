@@ -81,10 +81,10 @@ def CNN(X, Y):
     with tf.name_scope("dropout1"):
         dropout1 = tf.layers.dropout(dense1, rate=0.25, training=config.MODE == tf.estimator.ModeKeys.TRAIN)
     with tf.name_scope("dense2"):
-        dense2 = tf.layers.dense(inputs=dropout1, units=1024, activation=tf.nn.relu)
+        dense2 = tf.layers.dense(inputs=dropout1, units=1024, activation=tf.nn.leaky_relu)
     with tf.name_scope("dropout2"):
         dropout2 = tf.layers.dropout(dense2, rate=0.25, training=config.MODE == tf.estimator.ModeKeys.TRAIN)
     with tf.name_scope("out_layer"):
-        out_layer = tf.layers.dense(inputs=dropout2, units=config.label_array_length, activation=tf.nn.relu)
+        out_layer = tf.layers.dense(inputs=dropout2, units=config.label_array_length, activation=tf.nn.leaky_relu)
 
     return out_layer
