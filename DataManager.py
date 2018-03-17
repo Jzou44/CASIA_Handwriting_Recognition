@@ -34,7 +34,7 @@ class DataManager:
                 self.test_dataset_id_array.append(ID)
 
     def next_train_batch_random_select(self, batch_size=200):
-        select_ids = np.random.choice(self.train_dataset_id_array, batch_size)
+        select_ids = np.random.choice(self.train_dataset_id_array, batch_size, replace=False)
         select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids))
         self.CASIA_train_sqlite_cursor.execute(select_sql)
         select_data = self.CASIA_train_sqlite_cursor.fetchall()
@@ -42,12 +42,12 @@ class DataManager:
         return feature_batch, target_batch
 
     def next_train_batch_fix_character_amount(self, character_amount=90, each_character_sample_amount=2):
-        select_characters = np.random.choice(self.label_array, character_amount)
+        select_characters = np.random.choice(self.label_array, character_amount, replace=False)
         select_ids = []
         for character in select_characters:
-            select_id = np.random.choice(self.train_dataset_character_dict[character], each_character_sample_amount)
+            select_id = np.random.choice(self.train_dataset_character_dict[character], each_character_sample_amount, replace=False)
             select_ids.extend(select_id)
-        select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids))
+        select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids)) + " ORDER BY Character_in_gb2312"
         self.CASIA_train_sqlite_cursor.execute(select_sql)
         select_data = self.CASIA_train_sqlite_cursor.fetchall()
         feature_batch, target_batch = self.process_sqlite_data(select_data)
@@ -55,7 +55,7 @@ class DataManager:
 
     def next_test_batch(self, batch_size=200):
         if len(self.test_dataset_id_array) >= batch_size:
-            select_ids = np.random.choice(self.test_dataset_id_array, batch_size)
+            select_ids = np.random.choice(self.test_dataset_id_array, batch_size, replace=False)
         else:
             select_ids = self.test_dataset_id_array
         self.test_dataset_id_array = list(set(self.test_dataset_id_array) - set(select_ids))
@@ -66,6 +66,7 @@ class DataManager:
         return feature_batch, target_batch
 
     def process_sqlite_data(self, sqlite_data):
+
         feature_batch = np.zeros(shape=(len(sqlite_data), config.image_hight, config.image_width), dtype=np.float32)
         target_batch = np.zeros(shape=(len(sqlite_data), len(self.label_array)), dtype=np.float32)
         for i in range(len(sqlite_data)):

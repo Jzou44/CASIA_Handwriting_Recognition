@@ -3,7 +3,7 @@ import numpy as np
 import config, Logger
 
 
-def CNN(X, Y):
+def cnn(X, Y):
     input_layer = tf.reshape(X, [-1, config.image_hight, config.image_width, 1])
 
     # Input Tensor Shape: [batch_size, 128, 128, 1]
@@ -74,10 +74,13 @@ def CNN(X, Y):
 
     # Input Tensor Shape: [batch_size, 2, 2, 512]
     # Output Tensor Shape: [batch_size, 2 * 2 * 512]
-    pool6_flat = tf.reshape(pool6, [-1, 2 * 2 * 512])
+    feature_layer = tf.reshape(pool6, [-1, 2 * 2 * 512])
 
+    return feature_layer
+
+def full_connected_classifier(feature_layer):
     with tf.name_scope("dense1"):
-        dense1 = tf.layers.dense(inputs=pool6_flat, units=1024, activation=tf.nn.leaky_relu)
+        dense1 = tf.layers.dense(inputs=feature_layer, units=1024, activation=tf.nn.leaky_relu)
     with tf.name_scope("dropout1"):
         dropout1 = tf.layers.dropout(dense1, rate=0.25, training=config.MODE == tf.estimator.ModeKeys.TRAIN)
     with tf.name_scope("dense2"):
@@ -85,6 +88,6 @@ def CNN(X, Y):
     with tf.name_scope("dropout2"):
         dropout2 = tf.layers.dropout(dense2, rate=0.25, training=config.MODE == tf.estimator.ModeKeys.TRAIN)
     with tf.name_scope("out_layer"):
-        out_layer = tf.layers.dense(inputs=dropout2, units=config.label_array_length, activation=tf.nn.leaky_relu)
+        classification_layer = tf.layers.dense(inputs=dropout2, units=config.label_array_length, activation=tf.nn.leaky_relu)
 
-    return out_layer
+    return classification_layer
