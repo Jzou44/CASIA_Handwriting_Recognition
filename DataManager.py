@@ -28,12 +28,12 @@ class DataManager:
             self.CASIA_test_sqlite_connection = sqlite3.connect(config.CASIA_test_sqlite_file_path)
             self.CASIA_test_sqlite_cursor = self.CASIA_test_sqlite_connection.cursor()
             self.CASIA_test_sqlite_cursor.execute("SELECT ID,Character_in_gb2312 FROM TestDataset")
-            test_dataset_index = self.CASIA_train_sqlite_cursor.fetchall()
+            test_dataset_index = self.CASIA_test_sqlite_cursor.fetchall()
             self.test_dataset_id_array = []
             for ID, Character_in_gb2312 in test_dataset_index:
                 self.test_dataset_id_array.append(ID)
 
-    def next_train_batch_random_select(self, batch_size=300):
+    def next_train_batch_random_select(self, batch_size=200):
         select_ids = np.random.choice(self.train_dataset_id_array, batch_size)
         select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids))
         self.CASIA_train_sqlite_cursor.execute(select_sql)
@@ -41,7 +41,7 @@ class DataManager:
         feature_batch, target_batch = self.process_sqlite_data(select_data)
         return feature_batch, target_batch
 
-    def next_train_batch_fix_character_amount(self, character_amount=150, each_character_sample_amount=2):
+    def next_train_batch_fix_character_amount(self, character_amount=90, each_character_sample_amount=2):
         select_characters = np.random.choice(self.label_array, character_amount)
         select_ids = []
         for character in select_characters:
@@ -53,13 +53,13 @@ class DataManager:
         feature_batch, target_batch = self.process_sqlite_data(select_data)
         return feature_batch, target_batch
 
-    def next_test_batch(self, batch_size=300):
+    def next_test_batch(self, batch_size=200):
         if len(self.test_dataset_id_array) >= batch_size:
             select_ids = np.random.choice(self.test_dataset_id_array, batch_size)
-            self.test_dataset_id_array = list(set(self.test_dataset_id_array) - set(select_ids))
-            select_sql = "SELECT * FROM TestDataset WHERE ID IN " + str(tuple(select_ids))
         else:
-            select_sql = "SELECT * FROM TestDataset"
+            select_ids = self.test_dataset_id_array
+        self.test_dataset_id_array = list(set(self.test_dataset_id_array) - set(select_ids))
+        select_sql = "SELECT * FROM TestDataset WHERE ID IN " + str(tuple(select_ids))
         self.CASIA_test_sqlite_cursor.execute(select_sql)
         select_data = self.CASIA_test_sqlite_cursor.fetchall()
         feature_batch, target_batch = self.process_sqlite_data(select_data)
@@ -84,7 +84,7 @@ class DataManager:
             right_pad = (config.image_width - width) // 2 + np.mod(config.image_width - width, 2)
             img = np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad)), 'constant', constant_values=255)
             # 3. scale graylevel 255. to 0. and graylevel 0. to 1.
-            img = (255 - img) / 255
+            img = (255 - img)
             img = img.astype(np.float32)
             feature_batch[i, :, :] = img
             # construct target

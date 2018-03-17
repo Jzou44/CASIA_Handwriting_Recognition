@@ -23,7 +23,7 @@ with tf.Session() as sess:
     try:
         saver.restore(sess, weight_path)
     except:
-        print("no saved weight found.")
+        log.info("no saved weight found.")
 
     dm = DataManager.DataManager()
     if (config.MODE == tf.estimator.ModeKeys.TRAIN):

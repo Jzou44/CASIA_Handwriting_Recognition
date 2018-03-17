@@ -77,7 +77,7 @@ def CNN(X, Y):
     pool6_flat = tf.reshape(pool6, [-1, 2 * 2 * 512])
 
     with tf.name_scope("dense1"):
-        dense1 = tf.layers.dense(inputs=pool6_flat, units=1024, activation=tf.nn.relu)
+        dense1 = tf.layers.dense(inputs=pool6_flat, units=1024, activation=tf.nn.leaky_relu)
     with tf.name_scope("dropout1"):
         dropout1 = tf.layers.dropout(dense1, rate=0.25, training=config.MODE == tf.estimator.ModeKeys.TRAIN)
     with tf.name_scope("dense2"):
