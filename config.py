@@ -1,12 +1,12 @@
-CASIA_train_file_path = 'Dataset/1.0train-gb1.gnt'
-CASIA_test_file_path = 'Dataset/1.0test-gb1.gnt'
+import tensorflow as tf
+
+CASIA_train_sqlite_file_path = 'Dataset/TrainDataset.sqlite'
+CASIA_test_sqlite_file_path = 'Dataset/TestDataset.sqlite'
 CASIA_label_file_path = 'Dataset/label.pickle'
-log_file_path = 'log/model_1/tensorflow.log'
-subset_label_array_length = 3740  #
-dataset_header_size = 10
-target_image_hight = 128
-target_image_width = 128
-train_batch_size = 256
-test_batch_size = 256
+
+image_hight = 128
+image_width = 128
+label_array_length = 300
 learning_rate = 0.001
-train_MODE = True
+
+MODE = tf.estimator.ModeKeys.TRAIN
