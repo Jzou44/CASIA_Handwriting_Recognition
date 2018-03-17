@@ -30,7 +30,7 @@ with tf.Session() as sess:
         log.info("start training model...")
         batch_round = 1
         while True:
-            batch_x, batch_y = dm.next_train_batch_random_select(300)
+            batch_x, batch_y = dm.next_train_batch_random_select(200)
             _, cost = sess.run([train_op, loss], feed_dict={X: batch_x, Y: batch_y})
             log.info("batch_round: {0}, cost in this train batch={1}".format(batch_round, cost))
             if np.mod(batch_round, 100) == 0:
@@ -43,7 +43,7 @@ with tf.Session() as sess:
         test_sample_batch_number = 0
         test_sample_total_accuracy = 0
         while True:
-            batch_x, batch_y = dm.next_test_batch(300)
+            batch_x, batch_y = dm.next_test_batch(200)
             if (len(batch_x) == 0):
                 break
             pred = tf.nn.softmax(out_layer)
