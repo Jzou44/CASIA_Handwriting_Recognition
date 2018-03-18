@@ -11,6 +11,7 @@ each_character_sample_amount = 40
 def calculate_variance(classification_layer):
     character_layer = tf.reshape(classification_layer,
                                  shape=[character_amount, each_character_sample_amount, config.label_array_length])
+    #variance in all same class image
     character_layer_mean, character_layer_variance = tf.nn.moments(character_layer, [1])
     loss = tf.reduce_mean(character_layer_variance)
     return loss

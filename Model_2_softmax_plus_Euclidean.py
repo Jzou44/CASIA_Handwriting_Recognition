@@ -17,6 +17,7 @@ def calculate_euclidean(classification_layer):
                                          end=[character_amount * each_character_sample_amount,
                                               config.label_array_length],
                                          strides=[each_character_sample_amount, 1])
+    #discance between 2 image
     loss = tf.pow(tf.nn.l2_loss(character_layer_1 - character_layer_2), 0.5)
     return loss
 
