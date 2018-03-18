@@ -7,7 +7,6 @@ weight_path = 'weight/Model_3/Model_3.ckpt'
 character_amount = 5
 each_character_sample_amount = 40
 
-
 def calculate_variance(classification_layer):
     character_layer = tf.reshape(classification_layer,
                                  shape=[character_amount, each_character_sample_amount, config.label_array_length])
@@ -15,7 +14,6 @@ def calculate_variance(classification_layer):
     character_layer_mean, character_layer_variance = tf.nn.moments(character_layer, [1])
     loss = tf.reduce_mean(character_layer_variance)
     return loss
-
 
 # tf Graph input
 X = tf.placeholder("float", [None, config.image_hight, config.image_width])
@@ -39,7 +37,6 @@ with tf.Session() as sess:
         saver.restore(sess, weight_path)
     except:
         log.info("no saved weight found.")
-
     dm = DataManager.DataManager()
     if (config.MODE == tf.estimator.ModeKeys.TRAIN):
         log.info("start training model...")
@@ -53,7 +50,6 @@ with tf.Session() as sess:
                 save_path = saver.save(sess, weight_path)
                 log.info('save weight')
             batch_round = batch_round + 1
-
     if (config.MODE == tf.estimator.ModeKeys.EVAL):
         log.info("start evaluate model...")
         test_sample_batch_number = 0

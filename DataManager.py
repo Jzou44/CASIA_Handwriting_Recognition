@@ -13,7 +13,7 @@ class DataManager:
         if (config.MODE == tf.estimator.ModeKeys.TRAIN):
             self.CASIA_train_sqlite_connection = sqlite3.connect(config.CASIA_train_sqlite_file_path)
             self.CASIA_train_sqlite_cursor = self.CASIA_train_sqlite_connection.cursor()
-            #save sample index into array
+            # save sample index into array
             self.CASIA_train_sqlite_cursor.execute("SELECT ID,Character_in_gb2312 FROM TrainDataset")
             train_dataset_index = self.CASIA_train_sqlite_cursor.fetchall()
             self.train_dataset_id_array = []
@@ -24,7 +24,6 @@ class DataManager:
                     self.train_dataset_character_dict[Character_in_gb2312] = [ID]
                 else:
                     self.train_dataset_character_dict[Character_in_gb2312].append(ID)
-
         if (config.MODE == tf.estimator.ModeKeys.EVAL):
             self.CASIA_test_sqlite_connection = sqlite3.connect(config.CASIA_test_sqlite_file_path)
             self.CASIA_test_sqlite_cursor = self.CASIA_test_sqlite_connection.cursor()
@@ -33,7 +32,8 @@ class DataManager:
             self.test_dataset_id_array = []
             for ID, Character_in_gb2312 in test_dataset_index:
                 self.test_dataset_id_array.append(ID)
-    #ramdom select certain amount of training data
+
+    # ramdom select certain amount of training data
     def next_train_batch_random_select(self, batch_size=200):
         select_ids = np.random.choice(self.train_dataset_id_array, batch_size, replace=False)
         select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids))
@@ -41,14 +41,17 @@ class DataManager:
         select_data = self.CASIA_train_sqlite_cursor.fetchall()
         feature_batch, target_batch = self.process_sqlite_data(select_data)
         return feature_batch, target_batch
-    #ramdom select x sample in each y classes
+
+    # ramdom select x sample in each y classes
     def next_train_batch_fix_character_amount(self, character_amount=90, each_character_sample_amount=2):
         select_characters = np.random.choice(self.label_array, character_amount, replace=False)
         select_ids = []
         for character in select_characters:
-            select_id = np.random.choice(self.train_dataset_character_dict[character], each_character_sample_amount, replace=False)
+            select_id = np.random.choice(self.train_dataset_character_dict[character], each_character_sample_amount,
+                                         replace=False)
             select_ids.extend(select_id)
-        select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(tuple(select_ids)) + " ORDER BY Character_in_gb2312"
+        select_sql = "SELECT * FROM TrainDataset WHERE ID IN " + str(
+            tuple(select_ids)) + " ORDER BY Character_in_gb2312"
         self.CASIA_train_sqlite_cursor.execute(select_sql)
         select_data = self.CASIA_train_sqlite_cursor.fetchall()
         feature_batch, target_batch = self.process_sqlite_data(select_data)
@@ -70,7 +73,7 @@ class DataManager:
         feature_batch = np.zeros(shape=(len(sqlite_data), config.image_hight, config.image_width), dtype=np.float32)
         target_batch = np.zeros(shape=(len(sqlite_data), len(self.label_array)), dtype=np.float32)
         for i in range(len(sqlite_data)):
-            #construct features
+            # construct features
             img = pickle.loads(sqlite_data[i][5])
             height, width = np.shape(img)
             # 1. crop by (target_image_hight * target_image_width)
