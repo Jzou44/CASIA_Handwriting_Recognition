@@ -19,16 +19,15 @@ def calculate_variance(classification_layer):
 # tf Graph input
 X = tf.placeholder("float", [None, config.image_hight, config.image_width])
 Y = tf.placeholder("float", [None, config.label_array_length])
-
+#use convolutional neural network to extract features
 feature_layer = NN_Model.cnn(X, Y)
+#use fully connected neural network to classify
 classification_layer = NN_Model.full_connected_classifier(feature_layer)
-
-optimizer = tf.train.AdamOptimizer(learning_rate=0.001, epsilon=1)
-
+#loss_variance and loss_softmax are used in model 2
 loss_variance = calculate_variance(classification_layer)
-#
 loss_softmax = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=classification_layer, labels=Y))
 loss_softmax_plus_variance = tf.add(loss_softmax, tf.multiply(0.1, loss_variance))
+optimizer = tf.train.AdamOptimizer(learning_rate=0.001, epsilon=1)
 train_op = optimizer.minimize(loss_softmax_plus_variance)
 # Initializing the variables
 init = tf.global_variables_initializer()
