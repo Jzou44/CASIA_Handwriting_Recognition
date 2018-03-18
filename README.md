@@ -18,4 +18,10 @@ run model with command 'python Model_1_softmax_only.py'
 
 3 different model is provided.
 
+Model_1_softmax_only accuracy: 0.937968
+
+Model_2_softmax_plus_Euclidean accuracy: 0.949909
+
+Model_3_softmax_plus_Variance accuracy: 0.958333
+
 Model_3_softmax_plus_Variance is designed by myself.
