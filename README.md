@@ -16,6 +16,6 @@ Set Mode in 'config.py' (Train/Eval)
 
 run model with command 'python Model_1_softmax_only.py'
 
-3 differnt model is provided.
+3 different model is provided.
 
 Model_3_softmax_plus_Variance is designed by myself.
