@@ -2,22 +2,17 @@ import tensorflow as tf
 import numpy as np
 import config, DataManager, Logger, NN_Model
 
-log = Logger.get_logger('Model_2', 'log/Model_2.log')
-weight_path = 'weight/Model_2/Model_2.ckpt'
-character_amount = 90
-each_character_sample_amount = 2
+log = Logger.get_logger('Model_3', 'log/Model_3.log')
+weight_path = 'weight/Model_3/Model_3.ckpt'
+character_amount = 5
+each_character_sample_amount = 40
 
 
-def calculate_euclidean(classification_layer):
-    character_layer_1 = tf.strided_slice(classification_layer, begin=[0, 0],
-                                         end=[character_amount * each_character_sample_amount,
-                                              config.label_array_length],
-                                         strides=[each_character_sample_amount, 1])
-    character_layer_2 = tf.strided_slice(classification_layer, begin=[1, 0],
-                                         end=[character_amount * each_character_sample_amount,
-                                              config.label_array_length],
-                                         strides=[each_character_sample_amount, 1])
-    loss = tf.pow(tf.nn.l2_loss(character_layer_1 - character_layer_2), 0.5)
+def calculate_variance(classification_layer):
+    character_layer = tf.reshape(classification_layer,
+                                 shape=[character_amount, each_character_sample_amount, config.label_array_length])
+    character_layer_mean, character_layer_variance = tf.nn.moments(character_layer, [1])
+    loss = tf.reduce_mean(character_layer_variance)
     return loss
 
 
@@ -30,10 +25,10 @@ classification_layer = NN_Model.full_connected_classifier(feature_layer)
 
 optimizer = tf.train.AdamOptimizer(learning_rate=0.001, epsilon=1)
 
-loss_euclidean = calculate_euclidean(classification_layer)
+loss_euclidean = calculate_variance(classification_layer)
 #
 loss_softmax = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=classification_layer, labels=Y))
-loss_softmax_plus_euclidean = tf.add(loss_softmax, tf.multiply(1e-4, loss_euclidean))
+loss_softmax_plus_euclidean = tf.add(loss_softmax, tf.multiply(1.0, loss_euclidean))
 train_op = optimizer.minimize(loss_softmax_plus_euclidean)
 # Initializing the variables
 init = tf.global_variables_initializer()
