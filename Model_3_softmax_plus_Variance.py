@@ -48,7 +48,7 @@ with tf.Session() as sess:
             batch_x, batch_y = dm.next_train_batch_fix_character_amount(character_amount, each_character_sample_amount)
             _, cost, cost_s, cost_v = sess.run([train_op, loss_softmax_plus_variance, loss_softmax, loss_variance],
                                                feed_dict={X: batch_x, Y: batch_y})
-            log.info("batch_round: {0},cost={1},softmax={2},euclidean={3}".format(batch_round, cost, cost_s, cost_v))
+            log.info("batch_round: {0},cost={1},softmax={2},loss_variance={3}".format(batch_round, cost, cost_s, cost_v))
             if np.mod(batch_round, 100) == 0:
                 save_path = saver.save(sess, weight_path)
                 log.info('save weight')
