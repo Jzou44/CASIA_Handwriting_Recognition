@@ -1,6 +1,5 @@
 import tensorflow as tf
-import numpy as np
-import config, Logger
+import config
 
 
 def cnn(X, Y):
