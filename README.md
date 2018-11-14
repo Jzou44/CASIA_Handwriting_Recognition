@@ -1,6 +1,7 @@
 # CASIA_Handwriting_Recognition
 course project for ECE 9603B Data Analytics Foundations
 
+Blog: https://devtool.org/blog/casia-handwritten-chinese-character-recognition-using-convolutional-neural-network-and-similarity-ranking
 
 ## Usage
 
